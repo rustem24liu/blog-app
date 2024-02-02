@@ -1,13 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post {{ pk }}</title>
-</head>
-<body>
-    <h1>How I wish How I wish you were here</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="card">
+{#        <img src="..." class="card-img-top" alt="...">#}
+        <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p style="font-size: 12px; color: gray; font-weight: bold" class="card-subtitle mb-2 text-body-secondary">{{ post.author }}</p>
+                <p style="font-size: 10px; color: #666666; font-weight: bold ">{{ post.created_at }}</p>
+                <p class="card-text">{{ post.body }}</p>
+                <a href="{% url 'post_update' post.pk %}" class="btn btn-primary" style="width: 150px; margin: 5px">Edit</a>
+                <a href="{% url 'home_page' %}" class="btn btn-danger" style="width: 100px; margin:5px">Delete</a>
+        </div>
+</div>
+
+
+{% endblock %}

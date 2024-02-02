@@ -1,0 +1,24 @@
+            {% csrf_token %}
+            {{ errors }}
+
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                {% if errors.title %}
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" style="border: 1px red solid">
+                    <p class="text-danger">{{ errors.title }}</p>
+
+                    {% else %}
+                        <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+                {% endif %}
+
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea class="form-control" name="body" id="body" rows="4"></textarea>
+              </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" name="author" class="form-control" id="author" placeholder="Author">
+            </div>
