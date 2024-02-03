@@ -7,9 +7,10 @@
           <button type="button" class="list-group-item list-group-item-action" style="color: darkgray" aria-current="true">
               <a href="{% url 'post_detail' post.pk %}"><h5 class="mb-1" style="color: black">{{ post.id }}. {{post.title}}<p style="color: #666666; font-size: 15px"> by {{ post.author }}</p>
               </h5></a>
-          </button>
-            <a href="{% url 'post_update' post.pk %}" class="btn btn-primary" style="margin: 5px; width: 60px">Edit</a>
+              <a href="{% url 'post_update' post.pk %}" class="btn btn-primary" style="margin: 5px; width: 60px">Edit</a>
             <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger" style="width: 100px; margin: 5px; ">Delete</a>
+          </button>
+
         </div>
 
     {% endfor %}

@@ -1,24 +1,89 @@
             {% csrf_token %}
-            {{ errors }}
+{#            {{ errors }}#}
+{#{% load static %}#}
 
 
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                {% if errors.title %}
-                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" style="border: 1px red solid">
-                    <p class="text-danger">{{ errors.title }}</p>
+{#{{ form.as_p }}#}
 
-                    {% else %}
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-                {% endif %}
+            {% for error in non_field_errors %}
+                <p class="form-error">{{ error }}</p>
+            {% endfor %}
 
-            </div>
-            <div class="mb-3">
-                <label for="body" class="form-label">Body</label>
-                <textarea class="form-control" name="body" id="body" rows="4"></textarea>
-              </div>
 
-            <div class="mb-3">
-                <label for="author" class="form-label">Author</label>
-                <input type="text" name="author" class="form-control" id="author" placeholder="Author">
-            </div>
+<div class = "w-50">
+    {% for field in form %}
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% for error in field.errors %}
+        <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+{% endfor %}
+</div>
+
+
+{#            <div class="w-50">#}
+{#            {% for error in non_field_errors %}#}
+{#                <p class="form-error">{{ error }}</p>#}
+{#            {% endfor %}#}
+{##}
+{#                <div>#}
+{#                    <label class = "form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>#}
+{#                    {% for error in form.title.errors %}#}
+{#                        <p class = "text-danger">{{ error }}</p>#}
+{#                    {% endfor %}#}
+{##}
+{#                    {{ form.title }}#}
+{#                </div>#}
+{#            <div>#}
+{#                    <label for="{{ form.author.id_for_label }}">{{ form.author.label }}</label>#}
+{#                    {% for error in form.author.errors %}#}
+{#                        <p class = "text-danger">{{ error }}</p>#}
+{#                    {% endfor %}#}
+{##}
+{#                    {{ form.author }}#}
+{#                </div>#}
+{#            <div>#}
+{#                    <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>#}
+{#                    {% for error in form.body.errors %}#}
+{#                        <p class = "text-danger ">{{ error }}</p>#}
+{#                    {% endfor %}#}
+{##}
+{#                    {{ form.body }}#}
+{#                </div>#}
+{##}
+{#            </div>#}
+
+
+
+
+{#<div class="mb-3">#}
+{#                <label for="title" class="form-label">Title</label>#}
+{#                {% if errors.title %}#}
+{#                    <input type="text" name="title" class="form-control" id="title1" placeholder="Title">#}
+{#                    <p class="text-danger">{{ errors.title }}</p>#}
+{##}
+{#                    {% else %}#}
+{#                        <input type="text" name="title" class="form-control" id="title" placeholder="Title">#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
+{#            <div class="mb-3">#}
+{#                <label for="body" class="form-label">Body</label>#}
+{#                {% if errors.body %}#}
+{#                    <textarea class="form-control red_border" name="body" id="body1" rows="4"></textarea>#}
+{#                    <p class = "text-danger">{{ errors.body }}</p>#}
+{##}
+{#                    {% else %}#}
+{#                    <textarea class="form-control" name="body" id="body" rows="4"></textarea>#}
+{#                {% endif %}#}
+{#              </div>#}
+{##}
+{#            <div class="mb-3">#}
+{#                <label for="author" class="form-label">Author</label>#}
+{#                {% if errors.author %}#}
+{#                    <input type="text" name="author" class="form-control red_border" id="author1" placeholder="Author">#}
+{#                    <p class = "text-danger">{{ errors.author }}</p>#}
+{#                     {% else %}#}
+{#                        <input type="text" name="author" class="form-control" id="author" placeholder="Author">#}
+{#                {% endif %}#}
+{#            </div>#}

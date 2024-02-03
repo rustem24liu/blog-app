@@ -1,0 +1,6 @@
+.gray_font{
+    color: gray;
+}
+#title1, #body1, #author1{
+    border: 1px red solid;
+}

@@ -1,6 +1,5 @@
-from django.contrib import admin
 from django.urls import path
-from personal_blog.views import post_detail_view, post_create_view, post_list_view, post_update_view, post_delete_view
+from personal_blog.views.post_views import post_detail_view, post_create_view, post_list_view, post_update_view, post_delete_view
 
 
 urlpatterns = [
