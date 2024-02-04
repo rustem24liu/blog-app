@@ -5,7 +5,7 @@
 
         <form action="{% url 'post_update' post.pk %}" method="POST">
 
-            {% include 'partials/post_form.html'  %}
+            {% include 'partials/post_form.html' %}
 
             <button type="submit" class="btn btn-primary">Edit</button>
             <a href="{% url 'home_page' %}" type="submit" class="btn btn-light">Go Back to Home Page</a>

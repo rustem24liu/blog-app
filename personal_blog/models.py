@@ -3,6 +3,9 @@ from django.db import models
 class Author(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name='Name of the author')
 
+    def __str__(self):  # method str like in java
+        return f"{self.pk}. {self.name}"
+
 
 class Post(models.Model):
     title = models.CharField (max_length=200, null=False, blank=False, verbose_name="Header")
@@ -10,6 +13,7 @@ class Post(models.Model):
     body = models.TextField (max_length = 3000, null=False, blank=False, verbose_name="Body of the post")
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Author", null=False, blank=False)
+    # author = models.CharField(max_length=100, null=False, blank=False, verbose_name='Author')
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created Data")
 

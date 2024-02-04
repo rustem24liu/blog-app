@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+          <h1>Create post</h1>
+
+        <form action="{% url 'author_create' %}" method="POST">
+            {% include 'partials/post_form.html' %}
+
+            <button type="submit" class="btn btn-primary" style="margin-top : 15px;">Create</button>
+        </form>
+{% endblock %}
+

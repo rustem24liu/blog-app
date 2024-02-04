@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Create post</h1>
+    <form action="{% url 'post_create' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="w-50">
+            {% for error in non_field_errors %}
+                <p class="form-error">{{ error }}</p>
+            {% endfor %}
+
+            <div>
+                <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label}}</label>
+                <input type="text" class="form-control" name="title" placeholder="Title">
+                {% for error in form.title.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <label class="form-label" for="{{ form.author.id_for_label }}">{{ form.author.label}}</label>
+                <select class="form-control" name="author">
+{#                    <option value="">Select author</option>#}
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+                {% for error in form.author.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <label class="form-label" for="{{ form.body.id_for_label }}">{{ form.body.label}}</label>
+                <textarea class="form-control" name="body" rows="4"></textarea>
+                {% for error in form.body.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
+    </form>
+{% endblock %}
+

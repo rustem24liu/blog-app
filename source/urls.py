@@ -21,5 +21,6 @@ from personal_blog.views.post_views import index_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_view, name ="home_page"),
-    path('post/', include('personal_blog.urls')),
+    path('post/', include('personal_blog.urls.post_urls')),
+    path('author/', include('personal_blog.urls.author_urls'))
 ]

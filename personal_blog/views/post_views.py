@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 
 from personal_blog.forms import PostForm
-from personal_blog.models import Post
+from personal_blog.models import Post, Author
 
 
 # posts_list = [
@@ -54,12 +54,12 @@ def post_detail_view(request, *args, **kwargs):
     except Post.DoesNotExist as error:
         raise Http404('Post does not exist')
 
-    return render(request, 'post_view.html', context={'post': post})
+    return render(request, 'posts/view.html', context={'post': post})
 
 
 def post_list_view(request):
     posts = Post.objects.all()
-    return render(request, 'post_list.html', context={'posts': posts})
+    return render(request, 'posts/list.html', context={'posts': posts})
 
 
 def post_create_view(request):
@@ -67,21 +67,22 @@ def post_create_view(request):
     print(request.GET)
     if request.method == "GET":
         form = PostForm()
-        return render(request, 'post_create.html', context={'form':form})
+        return render(request, 'posts/create.html', context={'form':form, 'authors':Author.objects.all()})
     elif request.method == "POST":
 
         form = PostForm(request.POST)
 
         if form.is_valid():
+            author = Author.objects.get(pk=request.POST.get('author'))
             new_post = Post.objects.create(
                 title=form.cleaned_data['title'],
                 body=form.cleaned_data['body'],
-                author=form.cleaned_data['author'],
+                author=author,
             )
             return redirect('post_list')
 
         else:
-            return render(request, 'post_create.html', context={
+            return render(request, 'posts/create.html', context={
                 'form': form
             })
 
@@ -123,7 +124,7 @@ def post_update_view(request, *args, **kwargs):
             'body':post.body,
             'author':post.author
         })
-        return render(request, 'post_update.html', context={'form':form, 'post':post})
+        return render(request, 'posts/update.html', context={'form':form, 'post':post})
 
     elif request.method == "POST":
         form = PostForm(data=request.POST)
@@ -134,7 +135,7 @@ def post_update_view(request, *args, **kwargs):
             post.save()
             return redirect('post_detail', pk = post.pk)
         else:
-            return render(request, 'post_update.html', context={'form':form, 'post':post})
+            return render(request, 'posts/update.html', context={'form':form, 'post':post})
         # errors = dict()
         #
         # if not post.title:
@@ -159,7 +160,7 @@ def post_update_view(request, *args, **kwargs):
 def post_delete_view(request, *args, **kwargs):
     post = get_object_or_404(Post, pk=kwargs.get('pk'))
     if request.method == "GET":
-        return render(request, 'post_delete.html', context={'post': post})
+        return render(request, 'posts/delete.html', context={'post': post})
     elif request.method == "POST":
         post.delete()
         return redirect('home_page')
