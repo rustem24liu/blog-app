@@ -1,0 +1,23 @@
+[
+{
+  "model": "personal_blog.author",
+  "pk": 1,
+  "fields": {
+    "name": "Ryan"
+  }
+},
+{
+  "model": "personal_blog.author",
+  "pk": 2,
+  "fields": {
+    "name": "Leo Tolstoy"
+  }
+},
+{
+  "model": "personal_blog.author",
+  "pk": 3,
+  "fields": {
+    "name": "Fedor Dostaevsky"
+  }
+}
+]
