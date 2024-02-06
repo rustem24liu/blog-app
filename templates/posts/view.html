@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
 
     <div class="card">
 {#        <img src="..." class="card-img-top" alt="...">#}
@@ -14,5 +19,24 @@
         </div>
 </div>
 
+    <div class="card mb-5" style="margin-top: 10px">
+        <div class="card-body">
+            <form action="{% url 'comment_create' post.pk %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-success">Add Comment</button>
+            </form>
+        </div>
+
+    </div>
+    <div class="card">
+    {% for comment in post.Comments.all %}
+        <div class="card-body">
+        <p class="mb-0">{{ comment.text }}</p>
+        <p class="mb-0">by: {{ comment.author }}</p>
+        <p class="mb-0 gray_font fs-12">{{ comment.created_at }}</p>
+        </div>
+    {% endfor %}
+    </div>
 
 {% endblock %}

@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 
-from personal_blog.forms import PostForm
+from personal_blog.forms import PostForm, CommentForm
 from personal_blog.models import Post, Author
+from django.views.generic import View
 
 
 # posts_list = [
@@ -44,17 +45,37 @@ from personal_blog.models import Post, Author
 #     }
 # ]
 
-def index_view(request):
-    return render(request, 'index.html')
+# def index_view(request):
+#     return render(request, 'index.html')
 
 
-def post_detail_view(request, *args, **kwargs):
-    try:
-        post = Post.objects.all().get(pk=kwargs.get('pk'))
-    except Post.DoesNotExist as error:
-        raise Http404('Post does not exist')
 
-    return render(request, 'posts/view.html', context={'post': post})
+# def post_detail_view(request, *args, **kwargs):
+#     try:
+#         post = Post.objects.all().get(pk=kwargs.get('pk'))
+#     except Post.DoesNotExist as error:
+#         raise Http404('Post does not exist')
+#
+#     return render(request, 'posts/view.html', context={'post': post})
+
+class PostDetailView(View):
+    def get(self, request, *args, **kwargs):
+        form = CommentForm()
+        post = get_object_or_404(Post, pk = kwargs.get('pk'))
+        return render(request, 'posts/view.html', context={'post':post, 'form': form})
+
+class CommentView(View):
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        post_pk = kwargs.get('post_pk')
+        if form.is_valid():
+            post = get_object_or_404(Post, pk=post_pk)
+            post.Comments.create(
+                text=request.POST.get("text"),
+                author=request.POST.get("author")
+                )
+            return redirect('post_detail', post_pk)
+
 
 
 def post_list_view(request):
@@ -164,3 +185,5 @@ def post_delete_view(request, *args, **kwargs):
     elif request.method == "POST":
         post.delete()
         return redirect('home_page')
+
+

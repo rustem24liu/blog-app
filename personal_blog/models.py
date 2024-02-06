@@ -26,3 +26,16 @@ class Post(models.Model):
 
     class Meta:
         pass
+
+class Comment(models.Model):
+    text = models.TextField (max_length=1000, null=False, blank=False, verbose_name='Comment')
+    author = models.CharField(max_length=50, null=False, blank=False, default="Anonymous", verbose_name="Author")
+
+    post = models.ForeignKey('personal_blog.Post', on_delete=models.CASCADE, related_name='Comments', verbose_name="Post")
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created Data")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated Data")
+
+    def __str__(self) :
+        return f"{self.text[:20]} by {self.author}"
+

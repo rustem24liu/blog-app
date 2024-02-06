@@ -4,3 +4,15 @@
 #title1, #body1, #author1{
     border: 1px red solid;
 }
+
+.grey_font {
+    color: grey;
+}
+
+.red_border {
+    border: 1px red solid;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
