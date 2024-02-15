@@ -10,17 +10,17 @@
             {% endfor %}
 
 
-<div class = "w-50">
-    {% for field in form %}
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-    {{ field }}
-    {% for error in field.errors %}
-        <p class="text-danger">{{ error }}</p>
-        {% endfor %}
-{% endfor %}
-</div>
-
-
+            <div class = "w-50">
+                {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+            {% endfor %}
+            </div>
+{##}
+{##}
 {#            <div class="w-50">#}
 {#            {% for error in non_field_errors %}#}
 {#                <p class="form-error">{{ error }}</p>#}
@@ -52,10 +52,10 @@
 {#                </div>#}
 {##}
 {#            </div>#}
-
-
-
-
+{##}
+{##}
+{##}
+{##}
 {#<div class="mb-3">#}
 {#                <label for="title" class="form-label">Title</label>#}
 {#                {% if errors.title %}#}

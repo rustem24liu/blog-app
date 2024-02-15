@@ -1,0 +1,8 @@
+<form action="" class="d-flex" method="GET">
+    <input type="search" class="form-control" name="search">
+    <button class="btn btn-success">Search</button>
+    {% for error in form.search.errors %}
+
+        <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+</form>

@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
 
 {% block  content %}
 
+    {% include 'partials/pagination.html' %}
     <div class="list_group">
     {% for author in authors %}
         <p class="list-group-item list-group-item-action" style="border: 1px gray solid; border-radius: 10px; padding: 15px">{{ author }}</p>
     {% endfor %}
+
+    {% include 'partials/pagination.html' %}
     </div>
 {% endblock %}

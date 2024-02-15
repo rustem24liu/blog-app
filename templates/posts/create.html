@@ -5,38 +5,48 @@
     <form action="{% url 'post_create' %}" method="POST">
         {% csrf_token %}
 
-        <div class="w-50">
-            {% for error in non_field_errors %}
-                <p class="form-error">{{ error }}</p>
-            {% endfor %}
+            {% include 'partials/post_form.html' %}
 
-            <div>
-                <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label}}</label>
-                <input type="text" class="form-control" name="title" placeholder="Title">
-                {% for error in form.title.errors %}
-                    <p class="text-danger">{{ error }}</p>
-                {% endfor %}
-            </div>
-            <div>
-                <label class="form-label" for="{{ form.author.id_for_label }}">{{ form.author.label}}</label>
-                <select class="form-control" name="author">
+{#            {{ form.errors }}#}
+{##}
+{#            {% for error in form.non_field_errors %}#}
+{#                <p class="alert alert-danger">{{ error }}</p>#}
+{#            {% endfor %}#}
+{##}
+{#            <div>#}
+{#                <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label}}</label>#}
+{#                <input type="text" class="form-control" name="title" placeholder="Title">#}
+{#                {% for error in form.title.errors %}#}
+{#                    <p class="text-danger">{{ error }}</p>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div>#}
+{#                <label class="form-label" for="{{ form.author.id_for_label }}">{{ form.author.label}}</label>#}
+{#                <select class="form-control" name="author">#}
 {#                    <option value="">Select author</option>#}
-                    {% for author in authors %}
-                        <option value="{{ author.id }}">{{ author.name }}</option>
-                    {% endfor %}
-                </select>
-                {% for error in form.author.errors %}
-                    <p class="text-danger">{{ error }}</p>
-                {% endfor %}
-            </div>
-            <div>
-                <label class="form-label" for="{{ form.body.id_for_label }}">{{ form.body.label}}</label>
-                <textarea class="form-control" name="body" rows="4"></textarea>
-                {% for error in form.body.errors %}
-                    <p class="text-danger">{{ error }}</p>
-                {% endfor %}
-            </div>
-        </div>
+{#                    {% for author in authors %}#}
+{#                        <option value="{{ author.id }}">{{ author.name }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#                {% for error in form.author.errors %}#}
+{#                    <p class="text-danger">{{ error }}</p>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div>#}
+{#                <label class="form-label" for="{{ form.body.id_for_label }}">{{ form.body.label}}</label>#}
+{#                <textarea class="form-control" name="body" rows="4"></textarea>#}
+{#                {% for error in form.body.errors %}#}
+{#                    <p class="text-danger">{{ error }}</p>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        <div>#}
+{#            <label class="form-label" for="{{ form.tags.id_for_label }}">{{ form.tags.label}}</label>#}
+{#            {{ form.tags }}#}
+{#                {% for error in form.tags.errors %}#}
+{#                        <p class="text-danger">{{ error }}</p>#}
+{#                {% endfor %}#}
+{#        </div>#}
+{#        </div>#}
         <button type="submit" class="btn btn-primary mt-3">Create</button>
     </form>
 {% endblock %}
